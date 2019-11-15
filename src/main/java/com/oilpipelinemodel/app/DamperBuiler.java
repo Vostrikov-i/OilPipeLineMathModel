@@ -1,5 +1,7 @@
 package com.oilpipelinemodel.app;
 
+import com.oilpipelinemodel.app.prototype.DamperProt;
+
 class DamperBuiler extends aPipeObjectBuilder {
 
     private MagistralBuilder mB;
@@ -20,6 +22,13 @@ class DamperBuiler extends aPipeObjectBuilder {
     void setApproxCoeffA(double coeffA){
        this.coeffA=coeffA;
     }
+
+    // метод создания по образцу
+    public void createByProt(DamperProt dProt){
+        diam=dProt.getDiam();
+        coeffA=dProt.getCoeffA();
+    }
+
     @Override
     void commit() {
         Damper dm=new Damper();

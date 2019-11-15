@@ -1,9 +1,11 @@
 package com.oilpipelinemodel.app;
+
+import com.oilpipelinemodel.app.prototype.nReturnValveProt;
+
 // строитель для обратного клапана
 public class notReturnValveBuilder extends aPipeObjectBuilder {
-    private nRetrunValve nRv; // обратный клапан
-    private double diam=0.2;
     private MagistralBuilder mB;
+    private double diam=0.2;
     private int numBranch=0;
     // константы, потому что нет смысла в разбиении обратного клапана на более чем 1 сегмент, длину сегмента  и самого нефтепровода выбрали минимальную
     private final long lenght=1;
@@ -12,6 +14,13 @@ public class notReturnValveBuilder extends aPipeObjectBuilder {
 
     notReturnValveBuilder(MagistralBuilder mB){
         this.mB=mB;
+    }
+
+
+
+    // метод создания по образцу
+    public void createByProt(nReturnValveProt nrvProt){
+        diam=nrvProt.getDiam();
     }
 
     public void setDiam(double diam){
@@ -24,7 +33,7 @@ public class notReturnValveBuilder extends aPipeObjectBuilder {
 
     @Override
     void commit() {
-        nRv=new nRetrunValve();
+        nRetrunValve nRv=new nRetrunValve();
         nRv.SetDiam(this.diam);
         nRv.setNumBranch(this.numBranch);
         nRv.SetPipeLen(lenght);

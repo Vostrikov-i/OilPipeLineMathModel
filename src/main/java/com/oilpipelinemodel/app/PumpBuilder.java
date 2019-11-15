@@ -15,6 +15,8 @@ package com.oilpipelinemodel.app;
 * public метода в который нужно передать параметр с default видимостью не лучшее решение
 * */
 
+import com.oilpipelinemodel.app.prototype.PumpProt;
+
 public class PumpBuilder {
 
     private double diam=0.2;
@@ -32,6 +34,13 @@ public class PumpBuilder {
     }
 
     public void setDiam(double diam) { this.diam=diam; }
+
+    public void createByProt(PumpProt pmpProt){
+        diam=pmpProt.getDiam();
+        maxSpeed=pmpProt.getMaxSpeed();
+        coeffA=pmpProt.getCoeffA();
+        coeffB=pmpProt.getCoeffB();
+    }
 
     public void commit() {
         Pump pp=new Pump();

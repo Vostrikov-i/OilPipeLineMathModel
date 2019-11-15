@@ -1,7 +1,13 @@
 package com.oilpipelinemodel.app;
+
+import com.oilpipelinemodel.app.prototype.PipelineProt;
+
 /*
 * Класс конкретного строителя для трубы нефтепровода
+* Может строить как обычный строитель по шагам и потом собирать готовый объект
+* Может строить по образцу, методом createbyProt - подается образец и на основании его полей заполняются поля создаваемого объекта
 *
+* TODO Возможно вызвать метод создания по образцу а потом вызывать Setter методы и тогда параметры образца не применятся, возможно стоит сделать что createByProt
 *
 * */
 public class PipeLineBuilder extends aPipeObjectBuilder {
@@ -35,6 +41,14 @@ public class PipeLineBuilder extends aPipeObjectBuilder {
     void setNumBranch(int numBranch){
         this.numBranch=numBranch;
     }
+
+    // метод создания по образцу
+    public void createByProt(PipelineProt pProt){
+        diam=pProt.getDiam();
+        lenght=pProt.getLenght();
+        segmentLen=pProt.getSegmentLen();
+    }
+
 
     @Override
     public void commit()

@@ -1,5 +1,7 @@
 package com.oilpipelinemodel.app;
 
+import com.oilpipelinemodel.app.prototype.TankProt;
+
 public class STankBuilder extends aPipeObjectBuilder {
 
     private double diam=0.2;
@@ -17,7 +19,15 @@ public class STankBuilder extends aPipeObjectBuilder {
    public void setDiam(double diam) {
         this.diam=diam;
     }
+    public void setHeight(double height){
+        this.height=height;
+    }
 
+    // метод создания по образцу
+    public void createByProt(TankProt tProt){
+        diam=tProt.getDiam();
+        height=tProt.getHeight();
+    }
     @Override
     public void commit() {
         StartTank st=new StartTank();
@@ -28,8 +38,6 @@ public class STankBuilder extends aPipeObjectBuilder {
         mB.addPipeObject(st);
     }
 
-    public void setHeight(double height){
-        this.height=height;
-    }
+
 
 }
