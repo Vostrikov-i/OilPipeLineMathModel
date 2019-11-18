@@ -1,6 +1,6 @@
 package com.oilpipelinemodel.app;
 
-class DamperBuilder {
+public class DamperBuilder {
 
     private MagistralBuilder mB;
     private double diam;

@@ -49,7 +49,7 @@ public class PipeLineBuilder {
 
 
 
-    public void build()
+    public PipelineProt build()
     {
         PipeLine pL=new PipeLine();
         PipelineProt pProt=new PipelineProt(); //класс фасад для объекта
@@ -64,6 +64,7 @@ public class PipeLineBuilder {
         pProt.setLenght(lenght);
         pProt.setNumBranch(numBranch);
         pProt.setBranchPosition(BranchPosition);
+        return pProt;
     }
 
 }

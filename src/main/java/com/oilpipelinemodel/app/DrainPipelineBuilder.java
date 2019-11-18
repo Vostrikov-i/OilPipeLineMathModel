@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-* Строитель ветвлений не должен использоваться вне пакета!
-* Используется только внутри строителей групп насосов и групп заслонок
-* TODO продумать механизм ветвления нефтепровода без дальнейшего его сужения, например сделать несколько параллельных веток нефтепровода
 * */
-class DrainPipelineBuilder  {
+public class DrainPipelineBuilder  {
     private double diam=0.2;
     private MagistralBuilder mB;
     private int numBranch=0;
