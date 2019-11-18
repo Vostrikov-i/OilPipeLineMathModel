@@ -15,8 +15,6 @@ package com.oilpipelinemodel.app;
 * public метода в который нужно передать параметр с default видимостью не лучшее решение
 * */
 
-import com.oilpipelinemodel.app.prototype.PumpProt;
-
 public class PumpBuilder {
 
     private double diam=0.2;
@@ -34,25 +32,6 @@ public class PumpBuilder {
     }
 
     public void setDiam(double diam) { this.diam=diam; }
-
-    public void createByProt(PumpProt pmpProt){
-        diam=pmpProt.getDiam();
-        maxSpeed=pmpProt.getMaxSpeed();
-        coeffA=pmpProt.getCoeffA();
-        coeffB=pmpProt.getCoeffB();
-        numBranch=pmpProt.getNumBranch();
-    }
-
-    public void build() {
-        Pump pp=new Pump();
-        pp.setApprox_a(coeffA);
-        pp.setApprox_b(coeffB);
-        pp.SetDiam(diam);
-        pp.setMax_speed(maxSpeed);
-        pp.SetPipeLen(lenght);
-        pp.SetSegmentLen(segmentLenght);
-        mB.addPipeObject(pp);
-    }
     public void setMaxSpeed(double maxSpeed){
         this.maxSpeed=maxSpeed;
     }
@@ -65,5 +44,35 @@ public class PumpBuilder {
     public void setApproxCoeffB(double coeffB){
         this.coeffB=coeffB;
     }
+
+    public void createByProt(PumpProt pmpProt){
+        diam=pmpProt.getDiam();
+        maxSpeed=pmpProt.getMaxSpeed();
+        coeffA=pmpProt.getCoeffA();
+        coeffB=pmpProt.getCoeffB();
+        numBranch=pmpProt.getNumBranch();
+    }
+
+    public PumpProt build() {
+        Pump pp=new Pump();
+        PumpProt pmpProt = new PumpProt();
+        long BranchPosition;
+        pp.setApprox_a(coeffA);
+        pp.setApprox_b(coeffB);
+        pp.setDiam(diam);
+        pp.setMax_speed(maxSpeed);
+        pp.setPipeLen(lenght);
+        pp.setSegmentLen(segmentLenght);
+        pp.setNumBranch(numBranch);
+        BranchPosition = mB.addPipeObject(pp);
+          pmpProt.setCoeffA(coeffA);
+          pmpProt.setCoeffB(coeffB);
+          pmpProt.setDiam(diam);
+          pmpProt.setMaxSpeed(maxSpeed);
+          pmpProt.setNumBranch(numBranch);
+          pmpProt.setBranchPosition(BranchPosition);
+        return pmpProt;
+    }
+
 }
 

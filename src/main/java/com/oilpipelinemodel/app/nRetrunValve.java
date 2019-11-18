@@ -20,31 +20,31 @@ class nRetrunValve extends aPipeObject implements ISheduled {
         double p_curr_pos;
         double p_curr_neg;
         double v_curr;
-        double d_t=new Long(this.GetPeriod()).doubleValue()/this.getCntSegments();
+        double d_t=new Long(this.getPeriod()).doubleValue()/this.getCntSegments();
         //Обновим значения предыдущего цикла
-        this.SetP_old_neg(numPoint,this.GetPress_curr_negValue(numPoint));
-        this.SetP_old_pos(numPoint,this.GetPress_curr_posValue(numPoint));
+        this.setPOldNeg(numPoint,this.getPressCurrNegValue(numPoint));
+        this.setPOldPos(numPoint,this.getPressCurrPosValue(numPoint));
 
-        this.SetV_old_neg(numPoint,this.GetVel_curr_negValue(numPoint));
-        this.SetV_old_pos(numPoint,this.GetVel_curr_negValue(numPoint));
+        this.setVOldNeg(numPoint,this.getVelCurrNegValue(numPoint));
+        this.setVOldPos(numPoint,this.getVelCurrNegValue(numPoint));
         // Тест:
 
 
 
         dz_m = 0;//this.GetZValue(numPoint + 1) - this.GetZValue(numPoint);
         dz_p=0;//this.GetZValue(numPoint)-this.GetZValue(numPoint-1);
-        dx_m =(d_t/1000)*this.GetSpeedWave();// this.GetSegmentLen(); // по сути длина сегмента
-        dx_p =(d_t/1000)*this.GetSpeedWave();// this.GetSegmentLen(); // по сути длина сегмента
+        dx_m =(d_t/1000)*this.getSpeedWave();// this.GetSegmentLen(); // по сути длина сегмента
+        dx_p =(d_t/1000)*this.getSpeedWave();// this.GetSegmentLen(); // по сути длина сегмента
 
 
-        Fi_p = (this.GetLambda() * this.GetDensity() * this.GetVel_old_posValue(numPoint - 1)*Math.abs(this.GetVel_old_posValue(numPoint - 1)));
-        Fi_p=Fi_p/(2*this.GetDiam()+this.GetDensity()*this.g*(dz_p/dx_p));
+        Fi_p = (this.getLambda() * this.getDensity() * this.getVelOldPosValue(numPoint - 1)*Math.abs(this.getVelOldPosValue(numPoint - 1)));
+        Fi_p=Fi_p/(2*this.getDiam()+this.getDensity()*this.g*(dz_p/dx_p));
 
-        Fi_m = (this.GetLambda() * this.GetDensity() * this.GetVel_old_negValue(numPoint + 1)*Math.abs(this.GetVel_old_negValue(numPoint +1)));
-        Fi_m=Fi_m/(2*this.GetDiam()+this.GetDensity()*this.g*(dz_m/dx_m));
+        Fi_m = (this.getLambda() * this.getDensity() * this.getVelOldNegValue(numPoint + 1)*Math.abs(this.getVelOldNegValue(numPoint +1)));
+        Fi_m=Fi_m/(2*this.getDiam()+this.getDensity()*this.g*(dz_m/dx_m));
 
-        J_p = (this.GetPress_old_posValue(numPoint -1) + (this.GetDensity() * this.GetSpeedWave() * this.GetVel_old_posValue(numPoint - 1))) - dx_p * Fi_p;
-        J_m = (this.GetPress_old_negValue(numPoint +1) - (this.GetDensity() * this.GetSpeedWave() * this.GetVel_old_negValue(numPoint + 1))) + dx_m * Fi_m;
+        J_p = (this.getPressOldPosValue(numPoint -1) + (this.getDensity() * this.getSpeedWave() * this.getVelOldPosValue(numPoint - 1))) - dx_p * Fi_p;
+        J_m = (this.getPressOldNegValue(numPoint +1) - (this.getDensity() * this.getSpeedWave() * this.getVelOldNegValue(numPoint + 1))) + dx_m * Fi_m;
 
         if (J_p>J_m)
         {
@@ -64,14 +64,14 @@ class nRetrunValve extends aPipeObject implements ISheduled {
         // на трубе нет разрыва, положительная и отрицательная составляющие равны (разрыв может быть на задвижке, регуляторе и насосе)
 
         //Обновим значения текущего цикла
-        this.SetP_curr_neg(numPoint,p_curr_neg);
-        this.SetP_curr_pos(numPoint,p_curr_pos);
+        this.setPCurrNeg(numPoint,p_curr_neg);
+        this.setPCurrPos(numPoint,p_curr_pos);
         // скорость
-        v_curr = (J_p-J_m)/(2*this.GetDensity()*this.GetSpeedWave());
+        v_curr = (J_p-J_m)/(2*this.getDensity()*this.getSpeedWave());
 
         //Обновим значения текущего цикла
-        this.SetV_curr_neg(numPoint,v_curr);
-        this.SetV_curr_pos(numPoint,v_curr);
+        this.setVCurrNeg(numPoint,v_curr);
+        this.setVCurrPos(numPoint,v_curr);
 
         this.setPressure(numPoint-1,p_curr/1000000);
         this.setVelocity(numPoint-1,v_curr);
@@ -84,31 +84,31 @@ class nRetrunValve extends aPipeObject implements ISheduled {
     {
         // перекладка данных для рассчета от левого объекта
         if (left_object!=null) {
-            SetP_old_neg(0, left_object.getOutPressure_neg());
-            SetP_old_pos(0, left_object.getOutPressure_pos());
-            SetV_old_neg(0, left_object.getOutVelocity_neg());
-            SetV_old_pos(0, left_object.getOutVelocity_pos());
+            setPOldNeg(0, left_object.getOutPressure_neg());
+            setPOldPos(0, left_object.getOutPressure_pos());
+            setVOldNeg(0, left_object.getOutVelocity_neg());
+            setVOldPos(0, left_object.getOutVelocity_pos());
         }
         //перекладка данных для рассчета от правого объекта
         if (right_object!=null) {
-            int len=GetPress_old_neg().size();
+            int len= getPressOldNeg().size();
             if (len>1) {
-                SetP_old_neg(len-1, right_object.getInPressure_neg());
+                setPOldNeg(len-1, right_object.getInPressure_neg());
             }
 
-            len=GetPress_old_pos().size();
+            len= getPressOldPos().size();
             if (len>1) {
-                SetP_old_pos(0, right_object.getInPressure_pos());
+                setPOldPos(0, right_object.getInPressure_pos());
             }
 
-            len=GetVel_old_neg().size();
+            len= getVelOldNeg().size();
             if (len>1) {
-                SetV_old_neg(0, right_object.getInVelocity_neg());
+                setVOldNeg(0, right_object.getInVelocity_neg());
             }
 
-            len=GetVel_old_pos().size();
+            len= getVelOldPos().size();
             if (len>1) {
-                SetV_old_pos(0, right_object.getInVelocity_pos());
+                setVOldPos(0, right_object.getInVelocity_pos());
             }
         }
 
@@ -139,54 +139,54 @@ class nRetrunValve extends aPipeObject implements ISheduled {
 
     @Override
     public Double getInPressure_pos() {
-        if (GetPress_old_pos().size()>1) {
-            return GetPress_old_posValue(1);
+        if (getPressOldPos().size()>1) {
+            return getPressOldPosValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getInPressure_neg() {
-        if (GetPress_old_neg().size()>1) {
-            return GetPress_old_negValue(1);
+        if (getPressOldNeg().size()>1) {
+            return getPressOldNegValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getInVelocity_pos() {
-        if (GetVel_old_pos().size()>1) {
-            return GetVel_old_posValue(1);
+        if (getVelOldPos().size()>1) {
+            return getVelOldPosValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getInVelocity_neg() {
-        if (GetVel_old_neg().size()>1) {
-            return GetVel_old_negValue(1);
+        if (getVelOldNeg().size()>1) {
+            return getVelOldNegValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getOutPressure_pos() {
-        int len=GetPress_old_pos().size();
-        if (len>1) {return GetPress_old_posValue(len-2);} else {return null; }
+        int len= getPressOldPos().size();
+        if (len>1) {return getPressOldPosValue(len-2);} else {return null; }
     }
 
     @Override
     public Double getOutPressure_neg() {
-        int len=GetPress_old_neg().size();
-        if (len>1) {return GetPress_old_negValue(len-2);} else {return null; }
+        int len= getPressOldNeg().size();
+        if (len>1) {return getPressOldNegValue(len-2);} else {return null; }
     }
 
     @Override
     public Double getOutVelocity_pos() {
-        int len=GetVel_old_pos().size();
-        if (len>1) {return GetVel_old_posValue(len-2);} else {return null; }
+        int len= getVelOldPos().size();
+        if (len>1) {return getVelOldPosValue(len-2);} else {return null; }
     }
 
     @Override
     public Double getOutVelocity_neg() {
-        int len=GetVel_old_neg().size();
-        if (len>1) {return GetVel_old_negValue(len-2);} else {return null; }
+        int len= getVelOldNeg().size();
+        if (len>1) {return getVelOldNegValue(len-2);} else {return null; }
     }
 
     @Override

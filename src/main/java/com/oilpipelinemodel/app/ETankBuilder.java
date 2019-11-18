@@ -1,7 +1,5 @@
 package com.oilpipelinemodel.app;
 
-import com.oilpipelinemodel.app.prototype.TankProt;
-
 public class ETankBuilder {
 
     private double diam=0.2;
@@ -36,12 +34,18 @@ public class ETankBuilder {
     }
     public void commit() {
         EndTank et=new EndTank();
+        TankProt tProt = new TankProt();
+        long BranchPosition;
         et.setHeightTank(this.height);
-        et.SetDiam(this.diam);
-        et.SetPipeLen(lenght);
-        et.SetSegmentLen(segmentLenght);
+        et.setDiam(this.diam);
+        et.setPipeLen(lenght);
+        et.setSegmentLen(segmentLenght);
         et.setNumBranch(numBranch);
-        mB.addPipeObject(et);
+        BranchPosition = mB.addPipeObject(et);
+          tProt.setDiam(diam);
+          tProt.setHeight(height);
+          tProt.setNumBranch(numBranch);
+          tProt.setBranchPosition(BranchPosition);
     }
 
 

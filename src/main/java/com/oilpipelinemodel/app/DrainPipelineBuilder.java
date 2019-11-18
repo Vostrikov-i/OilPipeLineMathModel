@@ -1,6 +1,7 @@
 package com.oilpipelinemodel.app;
 
-import com.oilpipelinemodel.app.prototype.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 * Строитель ветвлений не должен использоваться вне пакета!
@@ -28,17 +29,35 @@ class DrainPipelineBuilder  {
         numBranch=dplProt.getNumBranch();
     }
 
-    public void build() {
+    public List<DrainPipeLineProt> build() {
         // это ветвление, поэтому создаем 2 ветки сразу
-        DrainPipeLine   dpL_top = new DrainPipeLine();
-        DrainPipeLine  dpL_down = new DrainPipeLine();
-        dpL_top.SetDiam(diam);
-        dpL_top.setNumBranch(this.numBranch);
+        DrainPipeLine dpL_top = new DrainPipeLine();
+        DrainPipeLine dpL_down = new DrainPipeLine();
+        long BranchPositionTop;
+        long BranchPositionDown;
+        List<DrainPipeLineProt> dplProt= new ArrayList<>();
+          dplProt.add(new DrainPipeLineProt());
+          dplProt.add(new DrainPipeLineProt());
+
+        dpL_top.setDiam(diam);
+        dpL_top.setNumBranch(numBranch);
         dpL_top.setDownObject(dpL_down);
-        dpL_down.SetDiam(diam);
-        dpL_down.setNumBranch(this.numBranch+1);
+        dpL_down.setDiam(diam);
+        dpL_down.setNumBranch(numBranch+1);
         dpL_top.setTopObject(dpL_top);
-        mB.addPipeObject(dpL_top);
-        mB.addPipeObject(dpL_down);
+
+        BranchPositionTop = mB.addPipeObject(dpL_top);
+        BranchPositionDown = mB.addPipeObject(dpL_down);
+
+          dplProt.get(0).setDiam(diam);
+          dplProt.get(0).setNumBranch(numBranch);
+          dplProt.get(0).setBranchPosition(BranchPositionTop);
+
+          dplProt.get(1).setDiam(diam);
+          dplProt.get(1).setNumBranch(numBranch+1);
+          dplProt.get(1).setBranchPosition(BranchPositionDown);
+
+        return dplProt;
+
     }
 }

@@ -1,7 +1,5 @@
 package com.oilpipelinemodel.app;
 
-import com.oilpipelinemodel.app.prototype.PipelineProt;
-
 /*
 * Класс конкретного строителя для трубы нефтепровода
 * Может строить как обычный строитель по шагам и потом собирать готовый объект
@@ -54,11 +52,18 @@ public class PipeLineBuilder {
     public void build()
     {
         PipeLine pL=new PipeLine();
-        pL.SetDiam(diam);
-        pL.SetSegmentLen(segmentLen);
-        pL.SetPipeLen(lenght);
+        PipelineProt pProt=new PipelineProt(); //класс фасад для объекта
+        long BranchPosition;
+        pL.setDiam(diam);
+        pL.setSegmentLen(segmentLen);
+        pL.setPipeLen(lenght);
         pL.setNumBranch(numBranch);
-        mB.addPipeObject(pL);
+        BranchPosition = mB.addPipeObject(pL);
+        pProt.setDiam(diam);
+        pProt.setSegmentLen(segmentLen);
+        pProt.setLenght(lenght);
+        pProt.setNumBranch(numBranch);
+        pProt.setBranchPosition(BranchPosition);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.oilpipelinemodel.app.prototype;
+package com.oilpipelinemodel.app;
 
 public class PipelineProt {
 
@@ -6,7 +6,7 @@ public class PipelineProt {
     private long lenght;
     private long segmentLen;
     private int numBranch;
-
+    private long BranchPosition; // положение объекта не ветке, этот параметр и номер ветки (numBranch ожднозначно определяют положение элемента в массиве)
 
     //Getter
     public double getDiam() {
@@ -21,6 +21,7 @@ public class PipelineProt {
     public int getNumBranch(){
         return numBranch;
     }
+    public long getBranchPosition() {return BranchPosition;}
 
 
     //Setter
@@ -36,4 +37,5 @@ public class PipelineProt {
     public void setNumBranch(int numBranch){
         this.numBranch=numBranch;
     }
+    /*non public!!! */void setBranchPosition(long BranchPosition) {this.BranchPosition=BranchPosition;}
 }

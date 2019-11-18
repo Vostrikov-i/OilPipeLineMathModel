@@ -10,9 +10,9 @@ class StartTank extends aPipeObject implements ISheduled
 
     public StartTank() {
         this.HeightTank=10;
-        this.SetDiam(0.6);
-        this.SetSegmentLen(50);
-        this.SetPipeLen(800);
+        this.setDiam(0.6);
+        this.setSegmentLen(50);
+        this.setPipeLen(800);
     }
 
     void setHeightTank(double heightTank) {
@@ -27,29 +27,29 @@ class StartTank extends aPipeObject implements ISheduled
         double J_m;
         double p_curr;
         double v_curr;
-        double d_t=new Long(this.GetPeriod()).doubleValue();
+        double d_t=new Long(this.getPeriod()).doubleValue();
 
-        this.SetP_old_neg(numPoint,this.GetPress_curr_negValue(numPoint));
-        this.SetP_old_pos(numPoint,this.GetPress_curr_posValue(numPoint));
+        this.setPOldNeg(numPoint,this.getPressCurrNegValue(numPoint));
+        this.setPOldPos(numPoint,this.getPressCurrPosValue(numPoint));
 
-        this.SetV_old_neg(numPoint,this.GetVel_curr_negValue(numPoint));
-        this.SetV_old_pos(numPoint,this.GetVel_curr_negValue(numPoint));
+        this.setVOldNeg(numPoint,this.getVelCurrNegValue(numPoint));
+        this.setVOldPos(numPoint,this.getVelCurrNegValue(numPoint));
 
-            dz_m=this.GetZValue(numPoint+1)-this.GetZValue(numPoint);
-            dx_m =(d_t/1000)*this.GetSpeedWave();// this.GetSegmentLen(); // по сути длина сегмента
-            Fi_m=(this.GetLambda()*this.GetDensity()*this.GetVel_old_negValue(numPoint+1)*Math.abs(this.GetVel_old_negValue(numPoint+1)));
-            Fi_m=Fi_m/(2*this.GetDiam()+this.GetDensity()*this.g*(dz_m/dx_m)); // просто потому что не влазило в одну строку
-            J_m=(this.GetPress_old_negValue(numPoint+1)-(this.GetDensity()*this.GetSpeedWave()*this.GetVel_old_negValue(numPoint+1)))+dx_m*Fi_m;
+            dz_m=this.getZValue(numPoint+1)-this.getZValue(numPoint);
+            dx_m =(d_t/1000)*this.getSpeedWave();// this.GetSegmentLen(); // по сути длина сегмента
+            Fi_m=(this.getLambda()*this.getDensity()*this.getVelOldNegValue(numPoint+1)*Math.abs(this.getVelOldNegValue(numPoint+1)));
+            Fi_m=Fi_m/(2*this.getDiam()+this.getDensity()*this.g*(dz_m/dx_m)); // просто потому что не влазило в одну строку
+            J_m=(this.getPressOldNegValue(numPoint+1)-(this.getDensity()*this.getSpeedWave()*this.getVelOldNegValue(numPoint+1)))+dx_m*Fi_m;
 
-            p_curr=this.GetDensity()*this.g*(this.HeightTank-this.GetZValue(numPoint)); // вычисляем текущее давление
-            v_curr=(p_curr-J_m)/(this.GetDensity()*this.GetSpeedWave());
+            p_curr=this.getDensity()*this.g*(this.HeightTank-this.getZValue(numPoint)); // вычисляем текущее давление
+            v_curr=(p_curr-J_m)/(this.getDensity()*this.getSpeedWave());
 
         // Обновим текущего значения
-        this.SetP_curr_neg(numPoint,p_curr);
-        this.SetP_curr_pos(numPoint,p_curr);
+        this.setPCurrNeg(numPoint,p_curr);
+        this.setPCurrPos(numPoint,p_curr);
         //Обновим значения текущего цикла
-        this.SetV_curr_neg(numPoint,v_curr);
-        this.SetV_curr_pos(numPoint,v_curr);
+        this.setVCurrNeg(numPoint,v_curr);
+        this.setVCurrPos(numPoint,v_curr);
 
         this.setPressure(numPoint-1,p_curr/1000000);
         this.setVelocity(numPoint-1,v_curr);
@@ -63,24 +63,24 @@ class StartTank extends aPipeObject implements ISheduled
 
         //перекладка данных для рассчета от правого объекта
         if (right_object!=null) {
-            int len=GetPress_old_neg().size();
+            int len= getPressOldNeg().size();
             if (len>1) {
-                SetP_old_neg(len-1, right_object.getInPressure_neg());
+                setPOldNeg(len-1, right_object.getInPressure_neg());
             }
 
-            len=GetPress_old_pos().size();
+            len= getPressOldPos().size();
             if (len>1) {
-                SetP_old_pos(0, right_object.getInPressure_pos());
+                setPOldPos(0, right_object.getInPressure_pos());
             }
 
-            len=GetVel_old_neg().size();
+            len= getVelOldNeg().size();
             if (len>1) {
-                SetV_old_neg(0, right_object.getInVelocity_neg());
+                setVOldNeg(0, right_object.getInVelocity_neg());
             }
 
-            len=GetVel_old_pos().size();
+            len= getVelOldPos().size();
             if (len>1) {
-                SetV_old_pos(0, right_object.getInVelocity_pos());
+                setVOldPos(0, right_object.getInVelocity_pos());
             }
         }
 
@@ -100,54 +100,54 @@ class StartTank extends aPipeObject implements ISheduled
 
     @Override
     public Double getInPressure_pos() {
-        if (GetPress_old_pos().size()>1) {
-            return GetPress_old_posValue(1);
+        if (getPressOldPos().size()>1) {
+            return getPressOldPosValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getInPressure_neg() {
-        if (GetPress_old_neg().size()>1) {
-            return GetPress_old_negValue(1);
+        if (getPressOldNeg().size()>1) {
+            return getPressOldNegValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getInVelocity_pos() {
-        if (GetVel_old_pos().size()>1) {
-            return GetVel_old_posValue(1);
+        if (getVelOldPos().size()>1) {
+            return getVelOldPosValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getInVelocity_neg() {
-        if (GetVel_old_neg().size()>1) {
-            return GetVel_old_negValue(1);
+        if (getVelOldNeg().size()>1) {
+            return getVelOldNegValue(1);
         } else {return null;}
     }
 
     @Override
     public Double getOutPressure_pos() {
-        int len=GetPress_old_pos().size();
-        if (len>1) {return GetPress_old_posValue(len-2);} else {return null; }
+        int len= getPressOldPos().size();
+        if (len>1) {return getPressOldPosValue(len-2);} else {return null; }
     }
 
     @Override
     public Double getOutPressure_neg() {
-        int len=GetPress_old_neg().size();
-        if (len>1) {return GetPress_old_negValue(len-2);} else {return null; }
+        int len= getPressOldNeg().size();
+        if (len>1) {return getPressOldNegValue(len-2);} else {return null; }
     }
 
     @Override
     public Double getOutVelocity_pos() {
-        int len=GetVel_old_pos().size();
-        if (len>1) {return GetVel_old_posValue(len-2);} else {return null; }
+        int len= getVelOldPos().size();
+        if (len>1) {return getVelOldPosValue(len-2);} else {return null; }
     }
 
     @Override
     public Double getOutVelocity_neg() {
-        int len=GetVel_old_neg().size();
-        if (len>1) {return GetVel_old_negValue(len-2);} else {return null; }
+        int len= getVelOldNeg().size();
+        if (len>1) {return getVelOldNegValue(len-2);} else {return null; }
     }
     @Override
     public IConnectedPipeObject getLeftObject() {

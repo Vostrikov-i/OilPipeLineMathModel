@@ -1,8 +1,7 @@
 package com.oilpipelinemodel.app;
 
-import com.oilpipelinemodel.app.GainPipeLine;
-import com.oilpipelinemodel.app.MagistralBuilder;
-import com.oilpipelinemodel.app.prototype.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GainPipelineBuilder {
 
@@ -22,17 +21,34 @@ public class GainPipelineBuilder {
         numBranch=gplProt.getNumBranch();
     }
 
-    public void build() {
+    public List<GainPipeLineProt> build() {
         // это ветвление, поэтому создаем 2 ветки сразу
         GainPipeLine gpL_top = new GainPipeLine();
         GainPipeLine gpL_down = new GainPipeLine();
-        gpL_top.SetDiam(diam);
+        long BranchPositionTop;
+        long BranchPositionDown;
+        List<GainPipeLineProt> gplProt= new ArrayList<>();
+          gplProt.add(new GainPipeLineProt());
+          gplProt.add(new GainPipeLineProt());
+
+        gpL_top.setDiam(diam);
         gpL_top.setNumBranch(this.numBranch);
         gpL_top.setDownObject(gpL_down);
-        gpL_down.SetDiam(diam);
+        gpL_down.setDiam(diam);
         gpL_down.setNumBranch(this.numBranch+1);
         gpL_top.setTopObject(gpL_top);
-        mB.addPipeObject(gpL_top);
-        mB.addPipeObject(gpL_down);
+        BranchPositionTop = mB.addPipeObject(gpL_top);
+        BranchPositionDown = mB.addPipeObject(gpL_down);
+
+          gplProt.get(0).setDiam(diam);
+          gplProt.get(0).setNumBranch(numBranch);
+          gplProt.get(0).setBranchPosition(BranchPositionTop);
+
+          gplProt.get(1).setDiam(diam);
+          gplProt.get(1).setNumBranch(numBranch+1);
+          gplProt.get(1).setBranchPosition(BranchPositionDown);
+
+        return gplProt;
+
     }
 }

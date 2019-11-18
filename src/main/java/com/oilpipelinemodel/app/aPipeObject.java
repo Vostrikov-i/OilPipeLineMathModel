@@ -75,12 +75,12 @@ abstract class aPipeObject
 
     //----------------------------------------------------
 
-    protected long GetPeriod(){return this.period;}
-    protected long GetId(){return this.id;} // Снаружи не даем доступ на изменение
-    protected long GetSegmentLen() {return this.segment_len;}
-    protected double GetSpeedWave(){return speedWave;}
-    protected double GetDensity(){return Density;}
-    protected double GetLambda()
+    protected long getPeriod(){return this.period;}
+    protected long getId(){return this.id;} // Снаружи не даем доступ на изменение
+    protected long getSegmentLen() {return this.segment_len;}
+    protected double getSpeedWave(){return speedWave;}
+    protected double getDensity(){return Density;}
+    protected double getLambda()
     {
         double pow;
         if (this.Diam>0 && this.visc>0) {
@@ -95,22 +95,22 @@ abstract class aPipeObject
         return this.Lamda;
 
     }
-    protected double GetDiam(){return this.Diam;}
-    protected double GetEpsilon(){return this.epsilon;}
-    protected double GetReinNum(){return this.ReinNum;}
-    protected long GetPipeLen(){return this.PipeLen;}
+    protected double getDiam(){return this.Diam;}
+    protected double getEpsilon(){return this.epsilon;}
+    protected double getReinNum(){return this.ReinNum;}
+    protected long getPipeLen(){return this.PipeLen;}
     protected int getNumberBranch(){return this.numBranch;}
 
     // Getter для всего массива
-    protected ArrayList<Double> GetZ() {return this.Z;}
-    protected ArrayList<Double> GetPress_old_pos() {return this.Press_old_pos;}
-    protected ArrayList<Double> GetPress_old_neg() {return this.Press_old_neg;}
-    protected ArrayList<Double> GetVel_old_neg() {return this.Vel_old_neg;}
-    protected ArrayList<Double> GetVel_old_pos() {return this.Vel_old_pos;}
+    protected ArrayList<Double> getZ() {return this.Z;}
+    protected ArrayList<Double> getPressOldPos() {return this.Press_old_pos;}
+    protected ArrayList<Double> getPressOldNeg() {return this.Press_old_neg;}
+    protected ArrayList<Double> getVelOldNeg() {return this.Vel_old_neg;}
+    protected ArrayList<Double> getVelOldPos() {return this.Vel_old_pos;}
 
 
     //TODO добавить обработку исключений по массиву
-    protected Double GetZValue(int index)
+    protected Double getZValue(int index)
     {
         if (index>=0 & index<(this.Z.size()))
         {
@@ -120,7 +120,7 @@ abstract class aPipeObject
                 return null;
             }
     }
-    protected Double GetPress_old_posValue(int index)
+    protected Double getPressOldPosValue(int index)
     {
         if (index>=0 & index<(this.Press_old_pos.size()))
         {
@@ -130,7 +130,7 @@ abstract class aPipeObject
             return null;
         }
     }
-    protected Double GetPress_old_negValue(int index)
+    protected Double getPressOldNegValue(int index)
     {
         if (index>=0 & index<(this.Press_old_neg.size()))
         {
@@ -140,7 +140,7 @@ abstract class aPipeObject
             return null;
         }
     }
-    protected Double GetVel_old_negValue(int index)
+    protected Double getVelOldNegValue(int index)
     {
         if (index>=0 & index<(this.Vel_old_neg.size()))
         {
@@ -150,7 +150,7 @@ abstract class aPipeObject
             return null;
         }
     }
-    protected Double GetVel_old_posValue(int index)
+    protected Double getVelOldPosValue(int index)
     {
         if (index>=0 & index<(this.Vel_old_pos.size()))
         {
@@ -162,7 +162,7 @@ abstract class aPipeObject
 
     }
 
-    protected Double GetPress_curr_posValue(int index)
+    protected Double getPressCurrPosValue(int index)
     {
         if (index>=0 & index<(this.Press_curr_pos.size()))
         {
@@ -172,7 +172,7 @@ abstract class aPipeObject
             return null;
         }
     }
-    protected Double GetPress_curr_negValue(int index)
+    protected Double getPressCurrNegValue(int index)
     {
         if (index>=0 & index<(this.Press_curr_neg.size()))
         {
@@ -182,7 +182,7 @@ abstract class aPipeObject
             return null;
         }
     }
-    protected Double GetVel_curr_negValue(int index)
+    protected Double getVelCurrNegValue(int index)
     {
         if (index>=0 & index<(this.Vel_curr_neg.size()))
         {
@@ -192,7 +192,7 @@ abstract class aPipeObject
             return null;
         }
     }
-    protected Double GetVel_curr_posValue(int index)
+    protected Double getVelCurrPosValue(int index)
     {
         if (index>=0 & index<(this.Vel_curr_pos.size()))
         {
@@ -213,7 +213,7 @@ abstract class aPipeObject
         return this.Velocity;
     }
 
-    protected double GetStartQ() {return StartQ;}
+    protected double getStartQ() {return StartQ;}
     protected long getCntSegments(){return Cnt_Segments;}
 
     //---------------------------------------------------------------------------------------------------------------Setter
@@ -228,7 +228,7 @@ abstract class aPipeObject
         }
         else return false;
     }
-    protected void SetSegmentLen(long segment_len) // Длина шага разбиения участка
+    protected void setSegmentLen(long segment_len) // Длина шага разбиения участка
     {
         this.segment_len=segment_len;
         if (this.PipeLen>0 & this.segment_len>0)
@@ -239,13 +239,13 @@ abstract class aPipeObject
         }
     }
 
-    protected void SetSpeedWave(double s_wave){if (s_wave>0) speedWave=s_wave;} //Скорость распространения волн в трубопроводе
-    protected void SetDensity(double dens){if (dens>0) Density=dens;} // Плотность нефти в трубопроводе
-    protected void SetStartQ(double inStartQ) {StartQ=inStartQ;} //Стартовый расход
+    protected void setSpeedWave(double s_wave){if (s_wave>0) speedWave=s_wave;} //Скорость распространения волн в трубопроводе
+    protected void setDensity(double dens){if (dens>0) Density=dens;} // Плотность нефти в трубопроводе
+    protected void setStartQ(double inStartQ) {StartQ=inStartQ;} //Стартовый расход
 
 
 
-    protected void SetPipeLen(long PipeLen)
+    protected void setPipeLen(long PipeLen)
     {
         if (PipeLen>0) this.PipeLen=PipeLen;
         if (this.PipeLen>0 & this.segment_len>0)
@@ -258,7 +258,7 @@ abstract class aPipeObject
 
 
 
-    protected void SetDiam(double Diam)
+    protected void setDiam(double Diam)
      {
       if (Diam>0)
        {
@@ -270,16 +270,16 @@ abstract class aPipeObject
           this.Lamda=0.11*Math.pow((this.epsilon+(68/(this.ReinNum))), 1/4); //
        }
     }
-    protected void SetZ(int index,Double Z) { this.Z.set(index, Z); }
-    protected void SetP_old_pos(int index, Double P_old_pos) { this.Press_old_pos.set(index, P_old_pos); }
-    protected void SetP_old_neg(int index, Double P_old_neg) { this.Press_old_neg.set(index, P_old_neg); }
-    protected void SetV_old_pos(int index, Double V_old_pos) { this.Vel_old_pos.set(index, V_old_pos); }
-    protected void SetV_old_neg(int index, Double V_old_neg) { this.Vel_old_neg.set(index, V_old_neg); }
+    protected void setZ(int index, Double Z) { this.Z.set(index, Z); }
+    protected void setPOldPos(int index, Double P_old_pos) { this.Press_old_pos.set(index, P_old_pos); }
+    protected void setPOldNeg(int index, Double P_old_neg) { this.Press_old_neg.set(index, P_old_neg); }
+    protected void setVOldPos(int index, Double V_old_pos) { this.Vel_old_pos.set(index, V_old_pos); }
+    protected void setVOldNeg(int index, Double V_old_neg) { this.Vel_old_neg.set(index, V_old_neg); }
 
-    protected void SetP_curr_pos(int index, Double P_curr_pos) { this.Press_curr_pos.set(index, P_curr_pos); }
-    protected void SetP_curr_neg(int index, Double P_curr_neg) { this.Press_curr_neg.set(index, P_curr_neg); }
-    protected void SetV_curr_pos(int index, Double V_curr_pos) { this.Vel_curr_pos.set(index, V_curr_pos); }
-    protected void SetV_curr_neg(int index, Double V_curr_neg) { this.Vel_curr_neg.set(index, V_curr_neg); }
+    protected void setPCurrPos(int index, Double P_curr_pos) { this.Press_curr_pos.set(index, P_curr_pos); }
+    protected void setPCurrNeg(int index, Double P_curr_neg) { this.Press_curr_neg.set(index, P_curr_neg); }
+    protected void setVCurrPos(int index, Double V_curr_pos) { this.Vel_curr_pos.set(index, V_curr_pos); }
+    protected void setVCurrNeg(int index, Double V_curr_neg) { this.Vel_curr_neg.set(index, V_curr_neg); }
 
     protected void setPressure(int point, Double value)
     {

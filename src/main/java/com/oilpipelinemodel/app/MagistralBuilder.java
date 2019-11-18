@@ -7,26 +7,18 @@ import java.util.ArrayList;
 * Здесь нет абстрактного класса для него, потому что в нем нет смысла,
 * строитель только одного типа, поэтому он и не нужен
 * Строитель имеет методы создания отдельных объектов нефтепровода, таких как участок трубы, стартовый и конечный резервуар, НПС и т.д
-* Метод создания объекта будет возвращать строителя для конкретного объекта, с помощью которого пользователь сможет построить объект нефтепровода и добавить его к нефтепроводу
 *
 *
 * */
-/*
-  TODO подумать над механизмом изменения значений у уже созданного объекта. Основной вопрос, как дать понять MagistralPipeline какой из его объектов мы хотим изменить,
-   кроме того изменения одного объекта (например диаметр для DrainPipeLine берется от того объекта к которому его присоединяют справа) получится что если мы изменим диаметр у насоса, то надо менять и диаметр ветвления
 
-   TODO Подумать над следующей проблемой
-    Если строитель не синглтон, то можно создать несколько строителей для адного и того же Magistral это плохо, особенно если это сделать в разных потоках
-    Если строитель синглтон, то как его использовать для нескольких Magistral (только если делать метод setMagistral(Magistral mP) но это опять же чревато для использования в нескольких потоках)
-    Возможно сделать Magistral синглтоном, однако это может сказаться на расширяемости решения, если в дальнейшем понадобится соединить например 2 объекта Magistral
-    Еще одно решение, придумать не полный синглтон, который будет создавать новый строитель, но только для нового Magistral, если мы используем тот же Magistral, то строитель остается тот же
- */
 public class MagistralBuilder {
 
     private MagistralPipeline mP=new MagistralPipeline();
     private PipeLineBuilder pB;
     private STankBuilder stB;
     private ETankBuilder etB;
+    private GainPipelineBuilder gplB;
+    private DrainPipelineBuilder dplB;
     private ArrayList<ArrayList<IConnectedPipeObject>> connectionObject = new ArrayList<>(); // конструируемый массив
     private ArrayList<Boolean> needNulladd = new ArrayList<>(); // флаги того, что соседние ветки надо дополнять null значениям, устанавливается когда в соседнюю ветку добавлен Gain и снимается когда добавляется Drain
 
@@ -37,8 +29,10 @@ public class MagistralBuilder {
          pB = new PipeLineBuilder(this);
          stB = new STankBuilder(this);
          etB = new ETankBuilder(this);
-    }
+        gplB = new GainPipelineBuilder(this);
+        dplB = new DrainPipelineBuilder(this);
 
+    }
 
     public PipeLineBuilder CreatePipeLine()
     {
@@ -52,6 +46,8 @@ public class MagistralBuilder {
     {
         return etB;
     }
+    public GainPipelineBuilder CreateGainPipeline(){return gplB;}
+    public DrainPipelineBuilder CreateDrainPipeline(){return dplB;}
 
     public MagistralPipeline build()
     {
@@ -83,8 +79,9 @@ public class MagistralBuilder {
      * */
 
     // метод добавления объекта к нефтепроводу, в конечном итоге его вызывают все строители объектов нефтепровода
-    void addPipeObject(IConnectedPipeObject add_obj) {
+    long addPipeObject(IConnectedPipeObject add_obj) {
         int currNumBranch;
+        long current_size=-1;
         currNumBranch = add_obj.getNumBranch();
 
         if (currNumBranch >= 0) { // будем делать манипуляции все, только если currNumBranch положительная
@@ -133,7 +130,7 @@ public class MagistralBuilder {
                 }
                 connectionObject.get(currNumBranch).add(add_obj); // теперь спокойно добавляем новый элемент
                 // проверим, если есть массивы других веток и их размеры меньше текущей ветки, то их надо доравнять до размера текущего заполнив недостающие null значениями
-                int current_size = connectionObject.get(currNumBranch).size();
+                 current_size = connectionObject.get(currNumBranch).size();
 
                 for (int i = 0; i < connectionObject.size(); i++) { // проходим по листам connectionObject
                     if (needNulladd.get(i)) { // если у ветки есть признак того, что ее надо дополнять Null
@@ -146,6 +143,7 @@ public class MagistralBuilder {
                 }
             }
         }
+        return current_size;
     }
 
 }
