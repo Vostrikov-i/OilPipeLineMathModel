@@ -9,6 +9,8 @@ public class ETankBuilder {
     private final long segmentLenght=10; // константы, т.к в целом разбивать более чем на 1 сегмент есть смысл только для нефтепровода, но длина нужна, для приведения рассчетов к реальному времени
     private final long lenght=10;
     private MagistralBuilder mB;
+    private int numBranch=0;
+
 
     // конструктор скрыть вне пакета
     ETankBuilder(MagistralBuilder mB)
@@ -19,10 +21,18 @@ public class ETankBuilder {
     public void setDiam(double diam) {
         this.diam=diam;
     }
+    public void setHeight(double height){
+        this.height=height;
+    }
+    public void setNumBranch(int numBranch) {
+        this.numBranch = numBranch;
+    }
+
     // метод создания по образцу
     public void createByProt(TankProt tProt){
         diam=tProt.getDiam();
         height=tProt.getHeight();
+        numBranch=tProt.getNumBranch();
     }
     public void commit() {
         EndTank et=new EndTank();
@@ -30,10 +40,9 @@ public class ETankBuilder {
         et.SetDiam(this.diam);
         et.SetPipeLen(lenght);
         et.SetSegmentLen(segmentLenght);
+        et.setNumBranch(numBranch);
         mB.addPipeObject(et);
     }
 
-    public void setHeight(double height){
-        this.height=height;
-    }
+
 }
