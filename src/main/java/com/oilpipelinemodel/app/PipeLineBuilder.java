@@ -10,7 +10,7 @@ import com.oilpipelinemodel.app.prototype.PipelineProt;
 * TODO Возможно вызвать метод создания по образцу а потом вызывать Setter методы и тогда параметры образца не применятся, возможно стоит сделать что createByProt
 *
 * */
-public class PipeLineBuilder extends aPipeObjectBuilder {
+public class PipeLineBuilder {
 
 
     private MagistralBuilder mB;
@@ -50,8 +50,8 @@ public class PipeLineBuilder extends aPipeObjectBuilder {
     }
 
 
-    @Override
-    public void commit()
+
+    public void build()
     {
         PipeLine pL=new PipeLine();
         pL.SetDiam(diam);

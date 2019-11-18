@@ -27,7 +27,6 @@ public class MagistralBuilder {
     private PipeLineBuilder pB;
     private STankBuilder stB;
     private ETankBuilder etB;
-    private SerialPumpBuilder pPB;
     private ArrayList<ArrayList<IConnectedPipeObject>> connectionObject = new ArrayList<>(); // конструируемый массив
     private ArrayList<Boolean> needNulladd = new ArrayList<>(); // флаги того, что соседние ветки надо дополнять null значениям, устанавливается когда в соседнюю ветку добавлен Gain и снимается когда добавляется Drain
 
@@ -38,7 +37,6 @@ public class MagistralBuilder {
          pB = new PipeLineBuilder(this);
          stB = new STankBuilder(this);
          etB = new ETankBuilder(this);
-         pPB = new SerialPumpBuilder(this);
     }
 
 
@@ -54,7 +52,6 @@ public class MagistralBuilder {
     {
         return etB;
     }
-    public SerialPumpBuilder CreateSerialPump() { return pPB; }
 
     public MagistralPipeline build()
     {

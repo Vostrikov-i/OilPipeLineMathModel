@@ -2,7 +2,7 @@ package com.oilpipelinemodel.app;
 
 import com.oilpipelinemodel.app.prototype.TankProt;
 
-public class ETankBuilder extends aPipeObjectBuilder {
+public class ETankBuilder {
 
     private double diam=0.2;
     private double height=10;
@@ -24,7 +24,6 @@ public class ETankBuilder extends aPipeObjectBuilder {
         diam=tProt.getDiam();
         height=tProt.getHeight();
     }
-    @Override
     public void commit() {
         EndTank et=new EndTank();
         et.setHeightTank(this.height);

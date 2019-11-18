@@ -3,7 +3,7 @@ package com.oilpipelinemodel.app;
 import com.oilpipelinemodel.app.prototype.nReturnValveProt;
 
 // строитель для обратного клапана
-public class notReturnValveBuilder extends aPipeObjectBuilder {
+public class notReturnValveBuilder {
     private MagistralBuilder mB;
     private double diam=0.2;
     private int numBranch=0;
@@ -31,8 +31,8 @@ public class notReturnValveBuilder extends aPipeObjectBuilder {
         this.numBranch = numBranch;
     }
 
-    @Override
-    void commit() {
+
+    void build() {
         nRetrunValve nRv=new nRetrunValve();
         nRv.SetDiam(this.diam);
         nRv.setNumBranch(this.numBranch);

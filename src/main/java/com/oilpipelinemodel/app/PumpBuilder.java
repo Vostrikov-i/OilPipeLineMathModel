@@ -23,14 +23,14 @@ public class PumpBuilder {
     private double maxSpeed=3000;
     private double coeffA=305.0;
     private double coeffB=0.00000208;
-    private aGroupPumpBuilder gPB;
+    private int numBranch=0;
     private final long segmentLenght=1; // константы, т.к в целом разбивать более чем на 1 сегмент есть смысл только для нефтепровода, но длина нужна, для приведения рассчетов к реальному времени
     private final long lenght=1;
+    private MagistralBuilder mB;
 
-    // конструктор скрыть вне пакета
-    PumpBuilder(aGroupPumpBuilder gPB)
+    PumpBuilder(MagistralBuilder mB)
     {
-        this.gPB=gPB;
+        this.mB=mB;
     }
 
     public void setDiam(double diam) { this.diam=diam; }
@@ -40,9 +40,10 @@ public class PumpBuilder {
         maxSpeed=pmpProt.getMaxSpeed();
         coeffA=pmpProt.getCoeffA();
         coeffB=pmpProt.getCoeffB();
+        numBranch=pmpProt.getNumBranch();
     }
 
-    public void commit() {
+    public void build() {
         Pump pp=new Pump();
         pp.setApprox_a(coeffA);
         pp.setApprox_b(coeffB);
@@ -50,13 +51,16 @@ public class PumpBuilder {
         pp.setMax_speed(maxSpeed);
         pp.SetPipeLen(lenght);
         pp.SetSegmentLen(segmentLenght);
-        gPB.addPumpObject(pp);
+        mB.addPipeObject(pp);
     }
     public void setMaxSpeed(double maxSpeed){
         this.maxSpeed=maxSpeed;
     }
     public void setApproxCoeffA(double coeffA){
         this.coeffA=coeffA;
+    }
+    public void setNumBranch(int numBranch){
+        this.numBranch=numBranch;
     }
     public void setApproxCoeffB(double coeffB){
         this.coeffB=coeffB;

@@ -10,15 +10,9 @@ public class GainPipeLine extends aPipeObject implements ISheduled, IBranched {
     private IConnectedPipeObject right_object;
 
 
-
-
-
-
     private void CalcPressPoint(int numPoint) {
 
     }
-
-
 
 
     @Override

@@ -1,20 +1,17 @@
 package com.oilpipelinemodel.app.prototype;
 
-public class DamperProt {
-    private double diam;
-    private double coeffA;
+public class DrainPipeLineProt {
     private int numBranch;
+    private double diam;
 
     //Getter
     public double getDiam() {
         return diam;
     }
-    public double getCoeffA() {
-        return coeffA;
-    }
     public int getNumBranch() {
         return numBranch;
     }
+
 
     //Setter
     public void setNumBranch(int numBranch) {
@@ -23,8 +20,4 @@ public class DamperProt {
     public void setDiam(double diam) {
         this.diam = diam;
     }
-    public void setCoeffA(double coeffA) {
-        this.coeffA = coeffA;
-    }
-
 }
