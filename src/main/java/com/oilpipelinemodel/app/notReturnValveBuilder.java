@@ -39,10 +39,11 @@ public class notReturnValveBuilder {
         nRv.setPipeLen(lenght);
         nRv.setSegmentLen(segment_lenght);
         nRv.setNumBranch(numBranch);
-       BranchPosition=mB.addPipeObject(nRv);
-       nrvProt.setDiam(this.diam);
-       nrvProt.setNumBranch(this.numBranch);
-       nrvProt.setBranchPosition(BranchPosition);
+        BranchPosition=mB.addPipeObject(nRv);
+         nrvProt.setDiam(this.diam);
+         nrvProt.setNumBranch(this.numBranch);
+         nrvProt.setBranchPosition(BranchPosition);
+         nrvProt.setLinkedObject(nRv);
        return nrvProt;
     }
 

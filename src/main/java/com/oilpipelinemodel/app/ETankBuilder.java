@@ -32,7 +32,7 @@ public class ETankBuilder {
         height=tProt.getHeight();
         numBranch=tProt.getNumBranch();
     }
-    public void commit() {
+    public TankProt build() {
         EndTank et=new EndTank();
         TankProt tProt = new TankProt();
         long BranchPosition;
@@ -46,6 +46,8 @@ public class ETankBuilder {
           tProt.setHeight(height);
           tProt.setNumBranch(numBranch);
           tProt.setBranchPosition(BranchPosition);
+          tProt.setLinkedObject(et);
+        return tProt;
     }
 
 

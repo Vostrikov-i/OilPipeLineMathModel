@@ -45,6 +45,7 @@ public class STankBuilder{
           tProt.setDiam(diam);
           tProt.setNumBranch(numBranch);
           tProt.setBranchPosition(BranchPosition);
+          tProt.setLinkedObject(st);
         return tProt;
     }
 

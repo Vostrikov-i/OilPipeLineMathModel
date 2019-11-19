@@ -59,11 +59,12 @@ public class PipeLineBuilder {
         pL.setPipeLen(lenght);
         pL.setNumBranch(numBranch);
         BranchPosition = mB.addPipeObject(pL);
-        pProt.setDiam(diam);
-        pProt.setSegmentLen(segmentLen);
-        pProt.setLenght(lenght);
-        pProt.setNumBranch(numBranch);
-        pProt.setBranchPosition(BranchPosition);
+          pProt.setDiam(diam);
+          pProt.setSegmentLen(segmentLen);
+          pProt.setLenght(lenght);
+          pProt.setNumBranch(numBranch);
+          pProt.setBranchPosition(BranchPosition);
+          pProt.setLinkedObject(pL);
         return pProt;
     }
 

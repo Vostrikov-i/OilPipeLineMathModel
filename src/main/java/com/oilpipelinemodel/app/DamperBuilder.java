@@ -39,6 +39,7 @@ public class DamperBuilder {
           dProt.setCoeffA(coeffA);
           dProt.setNumBranch(numBranch);
           dProt.setBranchPosition(BranchPosition);
+          dProt.setLinkedObject(dm);
         return dProt;
     }
 

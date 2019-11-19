@@ -36,18 +36,19 @@ public class GainPipelineBuilder {
         gpL_top.setDownObject(gpL_down);
         gpL_down.setDiam(diam);
         gpL_down.setNumBranch(this.numBranch+1);
-        gpL_top.setTopObject(gpL_top);
+        gpL_down.setTopObject(gpL_top);
         BranchPositionTop = mB.addPipeObject(gpL_top);
         BranchPositionDown = mB.addPipeObject(gpL_down);
 
           gplProt.get(0).setDiam(diam);
           gplProt.get(0).setNumBranch(numBranch);
           gplProt.get(0).setBranchPosition(BranchPositionTop);
+          gplProt.get(0).setLinkedObject(gpL_top);
 
           gplProt.get(1).setDiam(diam);
           gplProt.get(1).setNumBranch(numBranch+1);
           gplProt.get(1).setBranchPosition(BranchPositionDown);
-
+          gplProt.get(1).setLinkedObject(gpL_down);
         return gplProt;
 
     }
