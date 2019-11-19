@@ -27,7 +27,8 @@ public class PumpProt {
         return coeffB;
     }
     public long getBranchPosition() {return BranchPosition;}
-
+    // TODO Delete after tests
+    public IConnectedPipeObject getLinkedObject(){return (IConnectedPipeObject)linkedObject;}
 
     // Setter
     public void setMaxSpeed(double maxSpeed) {
@@ -46,7 +47,8 @@ public class PumpProt {
         this.numBranch=numBranch;
     }
     public List<Double> getPressure(){return linkedObject.getCurrPressure(); } //вернули давление связанного объекта
-    public List<Double> getValocity(){return linkedObject.getCurrVelocity();} // вернули скорость связанного объекта
+    public List<Double> getVelocity(){return linkedObject.getCurrVelocity();} // вернули скорость связанного объекта
+
     /*non public!!! */void setBranchPosition(long BranchPosition) {this.BranchPosition=BranchPosition;}
     /*non public!!!*/void setLinkedObject(ICalculatedPipeObject linkedObject){this.linkedObject=linkedObject;}
 }
