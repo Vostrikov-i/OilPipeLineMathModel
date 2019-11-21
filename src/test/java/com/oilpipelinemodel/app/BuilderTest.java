@@ -24,7 +24,7 @@ public class BuilderTest {
     static void beforeAll(){
         System.out.println("Starting Test");
     }
-
+/*
     @Test
     public void TestPumpBilder() {
         setD = 0.2;
@@ -217,5 +217,5 @@ public class BuilderTest {
     void CheckTwoNumber(int num1, int num2){
         assertEquals(num1, num2);
     }
-
+*/
 }

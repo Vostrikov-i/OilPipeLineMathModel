@@ -27,8 +27,6 @@ public class PumpProt {
         return coeffB;
     }
     public long getBranchPosition() {return BranchPosition;}
-    // TODO Delete after tests
-    public IConnectedPipeObject getLinkedObject(){return (IConnectedPipeObject)linkedObject;}
 
     // Setter
     public void setMaxSpeed(double maxSpeed) {

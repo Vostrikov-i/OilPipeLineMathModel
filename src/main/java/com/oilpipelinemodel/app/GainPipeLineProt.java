@@ -15,8 +15,7 @@ public class GainPipeLineProt {
         return numBranch;
     }
     public long getBranchPosition() {return BranchPosition;}
-    // TODO Delete after tests
-    public IConnectedPipeObject getLinkedObject(){return (IConnectedPipeObject)linkedObject;}
+
 
     //Setter
     public void setNumBranch(int numBranch) {
