@@ -24,7 +24,8 @@ public class PipelineProt {
         return numBranch;
     }
     public long getBranchPosition() {return BranchPosition;}
-
+    // TODO Delete after tests
+    public IConnectedPipeObject getLinkedObject(){return (IConnectedPipeObject)linkedObject;}
 
     //Setter
     public void setDiam(double diam) {

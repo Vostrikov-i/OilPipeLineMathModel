@@ -84,7 +84,7 @@ public class MagistralBuilder {
     // метод добавления объекта к нефтепроводу, в конечном итоге его вызывают все строители объектов нефтепровода
     long addPipeObject(IConnectedPipeObject add_obj) {
         int currNumBranch;
-        long current_size=-1;
+        long current_size=0;
         currNumBranch = add_obj.getNumBranch();
 
         if (currNumBranch >= 0) { // будем делать манипуляции все, только если currNumBranch положительная
@@ -146,7 +146,7 @@ public class MagistralBuilder {
                 }
             }
         }
-        return current_size;
+        return (current_size-1); // size() вовзращает размер массива с 1, а индекс добавленного элемента на 1 меньше, в случае неудачи вернем -1
     }
 
 }
