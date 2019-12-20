@@ -14,7 +14,7 @@ public class PipelineProt {
     public double getDiam() {
         return diam;
     }
-    public long getLenght() {
+    public long getLength() {
         return lenght;
     }
     public long getSegmentLen() {
@@ -30,7 +30,7 @@ public class PipelineProt {
     public void setDiam(double diam) {
         this.diam = diam;
     }
-    public void setLenght(long lenght) {
+    public void setLength(long lenght) {
         this.lenght = lenght;
     }
     public void setSegmentLen(long segmentLen) {
@@ -40,7 +40,7 @@ public class PipelineProt {
         this.numBranch=numBranch;
     }
     public List<Double> getPressure(){return linkedObject.getCurrPressure(); } //вернули давление связанного объекта
-    public List<Double> getValocity(){return linkedObject.getCurrVelocity();} // вернули скорость связанного объекта
+    public List<Double> getVelocity(){return linkedObject.getCurrVelocity();} // вернули скорость связанного объекта
     /*non public!!! */void setBranchPosition(long BranchPosition) {this.BranchPosition=BranchPosition;}
     /*non public!!!*/void setLinkedObject(ICalculatedPipeObject linkedObject){this.linkedObject=linkedObject;}
 }

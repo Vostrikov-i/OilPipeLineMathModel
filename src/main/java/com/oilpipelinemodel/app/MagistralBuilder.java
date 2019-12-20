@@ -1,6 +1,7 @@
 package com.oilpipelinemodel.app;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * Строитель магистрального нефтепровода
@@ -51,6 +52,18 @@ public class MagistralBuilder {
     public GainPipelineBuilder CreateGainPipeline(){return gplB;}
     public DrainPipelineBuilder CreateDrainPipeline(){return dplB;}
     public PumpBuilder CreatePump(){return pmpB;}
+
+    public void setPipeLineList(List<PipelineObject> pipelineObjectList){
+
+    };
+
+    public void setTankList(List<TankObject> tankObjectList){
+
+    };
+
+    public void setPumpList(List<PumpObject> pumpObjectList){
+
+    };
 
     public MagistralPipeline build()
     {
