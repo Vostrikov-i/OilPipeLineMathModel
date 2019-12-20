@@ -43,7 +43,7 @@ public class PipeLineBuilder {
     // метод создания по образцу
     public void createByProt(PipelineProt pProt){
         diam=pProt.getDiam();
-        lenght=pProt.getLenght();
+        lenght=pProt.getLength();
         segmentLen=pProt.getSegmentLen();
     }
 
@@ -59,11 +59,12 @@ public class PipeLineBuilder {
         pL.setPipeLen(lenght);
         pL.setNumBranch(numBranch);
         BranchPosition = mB.addPipeObject(pL);
-        pProt.setDiam(diam);
-        pProt.setSegmentLen(segmentLen);
-        pProt.setLenght(lenght);
-        pProt.setNumBranch(numBranch);
-        pProt.setBranchPosition(BranchPosition);
+          pProt.setDiam(diam);
+          pProt.setSegmentLen(segmentLen);
+          pProt.setLength(lenght);
+          pProt.setNumBranch(numBranch);
+          pProt.setBranchPosition(BranchPosition);
+          pProt.setLinkedObject(pL);
         return pProt;
     }
 

@@ -1,5 +1,7 @@
 package com.oilpipelinemodel.app;
 
+import java.util.List;
+
 public class PumpProt {
     private double diam;
     private double maxSpeed;
@@ -7,7 +9,7 @@ public class PumpProt {
     private double coeffB;
     private int numBranch;
     private long BranchPosition; // положение объекта не ветке, этот параметр и номер ветки (numBranch ожднозначно определяют положение элемента в массиве)
-
+    private ICalculatedPipeObject linkedObject; // связанный объект нефтепровода с данным прототипом
     // Getter
     public double getDiam() {
         return diam;
@@ -26,7 +28,6 @@ public class PumpProt {
     }
     public long getBranchPosition() {return BranchPosition;}
 
-
     // Setter
     public void setMaxSpeed(double maxSpeed) {
         this.maxSpeed = maxSpeed;
@@ -43,5 +44,9 @@ public class PumpProt {
     public void setNumBranch(int numBranch){
         this.numBranch=numBranch;
     }
+    public List<Double> getPressure(){return linkedObject.getCurrPressure(); } //вернули давление связанного объекта
+    public List<Double> getVelocity(){return linkedObject.getCurrVelocity();} // вернули скорость связанного объекта
+
     /*non public!!! */void setBranchPosition(long BranchPosition) {this.BranchPosition=BranchPosition;}
+    /*non public!!!*/void setLinkedObject(ICalculatedPipeObject linkedObject){this.linkedObject=linkedObject;}
 }

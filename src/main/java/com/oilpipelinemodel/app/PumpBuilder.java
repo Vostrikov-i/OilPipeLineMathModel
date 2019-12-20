@@ -71,6 +71,7 @@ public class PumpBuilder {
           pmpProt.setMaxSpeed(maxSpeed);
           pmpProt.setNumBranch(numBranch);
           pmpProt.setBranchPosition(BranchPosition);
+          pmpProt.setLinkedObject(pp);
         return pmpProt;
     }
 

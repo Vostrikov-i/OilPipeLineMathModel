@@ -84,5 +84,9 @@ public class MagistralPipeline{
     void setConfig(ArrayList<ArrayList<IConnectedPipeObject>> connectionObject) {
         this.connectionObject=connectionObject;
     }
+    //TODO delete after tests
+    public ArrayList<ArrayList<IConnectedPipeObject>> getConnectionMap(){
+        return connectionObject;
+    }
 
 }

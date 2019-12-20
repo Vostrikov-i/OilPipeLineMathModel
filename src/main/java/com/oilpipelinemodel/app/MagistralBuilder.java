@@ -1,6 +1,7 @@
 package com.oilpipelinemodel.app;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * Строитель магистрального нефтепровода
@@ -19,6 +20,7 @@ public class MagistralBuilder {
     private ETankBuilder etB;
     private GainPipelineBuilder gplB;
     private DrainPipelineBuilder dplB;
+    private PumpBuilder pmpB;
     private ArrayList<ArrayList<IConnectedPipeObject>> connectionObject = new ArrayList<>(); // конструируемый массив
     private ArrayList<Boolean> needNulladd = new ArrayList<>(); // флаги того, что соседние ветки надо дополнять null значениям, устанавливается когда в соседнюю ветку добавлен Gain и снимается когда добавляется Drain
 
@@ -31,6 +33,7 @@ public class MagistralBuilder {
          etB = new ETankBuilder(this);
         gplB = new GainPipelineBuilder(this);
         dplB = new DrainPipelineBuilder(this);
+        pmpB=new PumpBuilder(this);
 
     }
 
@@ -48,6 +51,19 @@ public class MagistralBuilder {
     }
     public GainPipelineBuilder CreateGainPipeline(){return gplB;}
     public DrainPipelineBuilder CreateDrainPipeline(){return dplB;}
+    public PumpBuilder CreatePump(){return pmpB;}
+
+    public void setPipeLineList(List<PipelineObject> pipelineObjectList){
+
+    };
+
+    public void setTankList(List<TankObject> tankObjectList){
+
+    };
+
+    public void setPumpList(List<PumpObject> pumpObjectList){
+
+    };
 
     public MagistralPipeline build()
     {
@@ -81,7 +97,7 @@ public class MagistralBuilder {
     // метод добавления объекта к нефтепроводу, в конечном итоге его вызывают все строители объектов нефтепровода
     long addPipeObject(IConnectedPipeObject add_obj) {
         int currNumBranch;
-        long current_size=-1;
+        long current_size=0;
         currNumBranch = add_obj.getNumBranch();
 
         if (currNumBranch >= 0) { // будем делать манипуляции все, только если currNumBranch положительная
@@ -143,7 +159,7 @@ public class MagistralBuilder {
                 }
             }
         }
-        return current_size;
+        return (current_size-1); // size() вовзращает размер массива с 1, а индекс добавленного элемента на 1 меньше, в случае неудачи вернем -1
     }
 
 }
